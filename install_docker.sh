@@ -23,3 +23,12 @@ yum-config-manager \
 
 # yum install docker 
 yum install -y docker-ce docker-ce-cli containerd.io
+# add Image source acceleration
+mkdir -p /etc/docker
+tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://etdea28s.mirror.aliyuncs.com"]
+}
+EOF
+systemctl daemon-reload
+systemctl restart docker
